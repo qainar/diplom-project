@@ -45,12 +45,13 @@ const CreateNews = () => {
                 </Typography>
                 <div>
                     <form>
-                        <Input value={title} placeholder='title of news' onChange={e => setTitle(e.target.value)}/>
-                        <Input value={description} placeholder='title of description' onChange={e => setDescription(e.target.value)}/>
+                        <Input value={title} placeholder='Title of news' onChange={e => setTitle(e.target.value)} style={{display: 'block'}}/>
+                        <Input value={description} placeholder='Tescription of news' onChange={e => setDescription(e.target.value)} style={{marginTop: '20px'}}/>
 
                         <TextArea value={text}
+                                  style={{marginTop: '20px'}}
                                   onChange={e => setText(e.target.value)}
-                                  placeholder="Description of course">
+                                  placeholder="Info">
 
                         </TextArea>
                     </form>

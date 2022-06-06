@@ -2,15 +2,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { Grid, Paper } from "@mui/material";
 import Box from '@mui/material/Box';
-import CircleProgress from '../details/CircleProgress';
-import {useEffect, useState, useRef} from 'react'
-import { Routes, Route, Link } from "react-router-dom";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import StickyNote from './StickyNote';
 import News from "./News";
 
@@ -24,61 +15,9 @@ const Cont = styled('div')({
 
 })
 
-const Evaluations = styled('span')({
-    fontSize: '20px',
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    textAlign: 'center',
-})
 
-const CircleContainer = styled('div')({
-    paddingTop: '20px',
-    
-})
-
-const Subtitle = styled('span')({
-    fontSize: '12px',
-    fontFamily: 'Montserrat',
-    fontWeight: 'lighter',
-    width: '70px',
-    
-})
-function createData(name, value) {
-    return {name, value}
-}
-
-const rows = [
-    createData('Math', 'solve the problem'),
-    createData('History', 'solve the problem'),
-    createData('Kazakh language', 'solve the problem')
-]
 
 const Main = () => {
-    const [progress, setProgress ] = useState(0)
-    const [color, setColor] = useState('')
-    const colorArray = ['#000000', '#ff6600', '#ffa500', '#ffe380', '#00ff00', '#f5487f']
-    const randomColor = () => {
-        return colorArray[Math.floor(Math.random() * colorArray.length)]
-    }
-
-
-    const onChange = e => {
-        if (e.target.value) {
-            let progress = e.target.value;
-            if (e.target.value > 100) {
-                progress = 100;
-            }
-            if (e.target.value < 0) {
-                progress = 0;
-            }
-          setProgress(progress);
-          const randomProgressColor = randomColor();
-          setColor(randomProgressColor);
-        } else {
-          setProgress(0);
-        }
-      }
-    
     return (
         <div style={{paddingTop: 30}}>
             

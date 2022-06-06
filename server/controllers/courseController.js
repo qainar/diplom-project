@@ -1,17 +1,14 @@
 const uuid = require('uuid')
 const path = require('path')
-const { Course, CourseInfo } = require('../models/models')
+const { Course, CourseInfo, User} = require('../models/models')
 const ApiError = require('../error/ApiError')
 class CourseController {
     async create(req, res, next) {
         try {
             let { name, price, brandId, typeId, info, small } = req.body
             const { img } = req.files
-            const {infoImg} = req.files
             let filename = uuid.v4() + '.jpg'
-            let infofile = uuid.v4() + '.jpg'
             img.mv(path.resolve(__dirname, '..', 'static', filename))
-            // infoImg.mv(path.resolve(__dirname, '..', 'static', infofile))
             const course = await Course.create({ name, price, small, brandId, typeId, img: filename })
 
             if (info) {
@@ -21,7 +18,6 @@ class CourseController {
                         title: i.title,
                         description: i.description,
                         courseId: course.id,
-                        infoImg: filename
                     })
                 )
             }
@@ -67,6 +63,20 @@ class CourseController {
             }
         )
         return res.json(course)
+    }
+
+    async getName(req,res) {
+        const { name } = req.query
+        console.log(name)
+        let array = []
+        const allCourses = await Course.findAll()
+        allCourses.forEach((course)=> {
+            course.name = course.name.toLowerCase()
+            if (course.name.includes(name.toLowerCase())){
+                array.push(course)
+            }
+        })
+        return res.json(array)
     }
 
     async DeleteOne(req, res) {

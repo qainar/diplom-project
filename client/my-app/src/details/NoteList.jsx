@@ -18,7 +18,8 @@ const NoteList = ({notes, handleAddNote, handleDeleteNote}) => {
                     id={note.id} 
                     text={note.text} 
                     date={note.date}
-                    handleDeleteNote={handleDeleteNote} 
+                    handleDeleteNote={handleDeleteNote}
+                    key ={note.id}
                 />
             ))}
         </NoteListDiv>

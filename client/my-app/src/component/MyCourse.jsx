@@ -1,17 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     fetchBasket,
     fetchBasketCourses,
     fetchCoursesByBasketId,
     fetchdeleteCourse,
-    fetchOneCourse
 } from "../http/courseApi";
 import CardMedia from "@mui/material/CardMedia";
 import { styled } from '@mui/material/styles';
 import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -32,26 +29,17 @@ const Cont = styled('div')({
     width: '1550px'
 })
 
-const DivContainer = styled('div')({
+const Flex = styled('div')({
     display: 'flex',
-    width: '100%',
-    padding: '20px',
-    marginBottom: '10px',
-    justifyContent: 'space-between',
-    border: '1px solid black',
-    borderRadius: '10px',
-    position: 'relative',
-
+    flexFlow: 'row wrap',
+    alignItems: 'flex-start',
 })
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(3),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    marginTop: '20px'
-}));
+const Carding = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '200px'
+})
 
 const LinkButton = styled(Button)({
     textDecoration: 'none',
@@ -104,43 +92,43 @@ const MyCourse = () => {
 
             <Cont>
                 <Box sx={{ flexGrow: 1, marginTop: '20px' }}>
-                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Flex>
                         {courses && courses.length !== 0 && courses.map((data) => (
-                            <Grid item xs={2} sm={4} md={4} key={data.id}>
-                                <Card sx={{ display: 'flex', }}>
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', }}>
-                                        <CardContent sx={{ flex: '1 0 auto' }}>
-                                            <Typography component="div" variant="h5">
-                                                {data.name}
-                                            </Typography>
-                                            <Typography variant="subtitle1" color="text.secondary" component="div">
-                                                {data.price}
-                                            </Typography>
-                                        </CardContent>
-                                        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 2 }}>
-                                            <Link to={'/courses/' + data.id} style={{ textDecoration: 'none', }}>
-                                                <LinkButton variant='outlined'>
-                                                    Link
-                                                </LinkButton>
-                                            </Link>
-                                            <IconButton>
-                                                <DeleteIcon onClick={() => deleteCourse(data.basketId)} />
-                                            </IconButton>
-                                        </Box>
+                            <Card sx={{ display: 'flex', margin: '0 15px' }} key={data.id}>
+                                <Carding>
+                                    <CardContent sx={{ flex: '1 0 auto' }}>
+                                        <Typography component="div" variant="h5">
+                                            {data.name}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="text.secondary" component="div">
+                                            {data.price}
+                                        </Typography>
+                                    </CardContent>
 
+                                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 2 }}>
+                                        <Link to={'/courses/' + data.id} style={{ textDecoration: 'none', }}>
+                                            <LinkButton variant='outlined'>
+                                                Link
+                                            </LinkButton>
+                                        </Link>
+                                        <IconButton>
+                                           <DeleteIcon onClick={() => deleteCourse(data.basketId)} />
+                                        </IconButton>
                                     </Box>
-                                    <CardMedia
-                                        component="img"
-                                        sx={{ width: 'auto', height: '180px' }}
-                                        image={'http://localhost:5000/' + data.img}
-                                        alt="Live from space album cover"
-                                    />
-                                    {/* <button onClick={() => deleteCourse(data.basketId)}>x</button> */}
-                                </Card>
-                            </Grid>
+
+
+                                </Carding>
+                                <CardMedia
+                                    component="img"
+                                    sx={{ width: '180px', height: '180px' }}
+                                    image={'http://localhost:5000/' + data.img}
+                                    alt="Live from space album cover"
+                                />
+
+                            </Card>
 
                         ))}
-                    </Grid>
+                    </Flex>
                 </Box>
             </Cont>
 

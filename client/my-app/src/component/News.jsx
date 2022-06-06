@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import {fetchNews} from "../http/courseApi";
-import {Paper} from "@mui/material";
 import { styled } from '@mui/material/styles';
 
 const Span = styled('span')({
@@ -35,7 +34,7 @@ const News = () => {
     return(
         <div>
             {news.length && news.map((news, idx)=>(
-                <div>
+                <div key={news.id}>
                     <div>
                         <Span>
                             {news.title}

@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Modal from '@mui/material/Modal';
 import { Button, InputLabel, MenuItem, FormControl, Select, Box, Grid, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
-import { createCourse, fetchBrands, fetchCourses, fetchTypes } from "../../http/courseApi";
+import { createCourse, fetchBrands,  fetchTypes } from "../../http/courseApi";
 import { styled } from '@mui/material/styles';
 
 
@@ -22,7 +21,7 @@ const TextArea = styled('textarea')({
     fontSize: '14px',
     resize: 'none',
     color: '#bbbbbb',
-    width: '400px',
+    width: '100%',
     display: 'block',
     padding: '10px 10px 10px 10px',
     marginTop: '10px',
@@ -36,7 +35,6 @@ const CreateCourse = observer(() => {
     const [file, setFile] = useState(null)
     const [info, setInfo] = useState([])
     const [small, setSmall] = useState('')
-    const [lol, setLol] = useState(null)
 
     useEffect(() => {
         fetchTypes().then(data => course.setTypes(data))
@@ -56,9 +54,6 @@ const CreateCourse = observer(() => {
         setFile(e.target.files[0])
     }
 
-    const selectLol = e => {
-        setLol(e.target.files[0])
-    }
     const addCourse = () => {
         const formData = new FormData()
         formData.append('name', name)
@@ -107,10 +102,10 @@ const CreateCourse = observer(() => {
                         </Select>
                     </FormControl>
 
-                    <Input value={name} onChange={e => setName(e.target.value)} placeholder={'Name of course'} />
-                    <Input value={price} onChange={e => setPrice(Number(e.target.value))} placeholder={'Price of course'} type='number' />
-                    <Input value={small} onChange={e => setSmall(e.target.value)} placeholder={'Small of course'} />
-                    <Input type='file' onChange={selectFile} />
+                    <Input value={name} onChange={e => setName(e.target.value)} placeholder={'Name of course'} style={{marginTop: '30px'}} />
+                    <Input value={price} onChange={e => setPrice(Number(e.target.value))} placeholder={'Price of course'} type='number' style={{marginTop: '20px'}}/>
+                    <Input value={small} onChange={e => setSmall(e.target.value)} placeholder={'Small of course'} style={{width: '100%', marginTop: '20px' }}/>
+                    <Input type='file' onChange={selectFile} style={{marginTop: '20px'}} />
                     <hr />
 
 
@@ -123,17 +118,11 @@ const CreateCourse = observer(() => {
                                 placeholder='Title of course'
                             />
 
-                            <Input
-                                value={i.description}
-                                onChange={(e) => changeInfo('description', e.target.value, i.number)}
-                                placeholder="Description of course"
-                            />
-                            <Input type='file' onChange={selectLol} />
-                            {/* <TextArea value={i.description}
+                            <TextArea value={i.description}
                                 onChange={(e) => changeInfo('description', e.target.value, i.number)}
                                 placeholder="Description of course">
 
-                            </TextArea> */}
+                            </TextArea>
 
 
 

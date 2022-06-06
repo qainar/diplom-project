@@ -10,6 +10,7 @@ export default class DeviceStore {
         this._page = 1
         this._totalCount = 0
         this._limit = 3
+        this._search = []
         makeAutoObservable(this)
     }
 
@@ -21,6 +22,10 @@ export default class DeviceStore {
     }
     setCourses(courses) {
         this._courses = courses
+    }
+
+    setSearch(search){
+        this._search = search
     }
 
     setSelectedType(type) {
@@ -36,6 +41,10 @@ export default class DeviceStore {
     }
     setTotalCount(count) {
         this._totalCount = count
+    }
+
+    get search(){
+        return this._search
     }
 
     get types() {

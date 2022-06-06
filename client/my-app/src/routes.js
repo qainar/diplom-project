@@ -49,5 +49,6 @@ export const publicRoutes = [
     {
         path: COURSETYPES + '/:id',
         element: TypesPage
-    }
+    },
+
 ]

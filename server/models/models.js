@@ -49,22 +49,12 @@ const CourseInfo = sequelize.define('course-info', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, allowNull: false },
     description: { type: DataTypes.TEXT, allowNull: false },
-    infoImg: {type: DataTypes.STRING, allowNull: false}
 })
 
 const TypeBrand = sequelize.define('type-brand', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 })
 
-const Groups = sequelize.define('groups', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, unique: true }
-})
-
-
-const GroupsStudentRelation = sequelize.define('groups-student-relation', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-})
 
 const News = sequelize.define('news', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -102,9 +92,6 @@ CourseInfo.belongsTo(Course)
 Type.belongsToMany(Brand, { through: TypeBrand })
 Brand.belongsToMany(Type, { through: TypeBrand })
 
-Groups.hasMany(User)
-User.belongsTo(Groups)
-
 
 
 
@@ -120,8 +107,6 @@ module.exports = {
     Rating,
     TypeBrand,
     CourseInfo,
-    Groups,
-    GroupsStudentRelation,
     News
 }
 

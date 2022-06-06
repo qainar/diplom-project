@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
-import { fetchOneCourse } from "../http/courseApi";
-import { Container, Grid } from "@mui/material";
+import { useParams} from "react-router-dom";
+import { fetchOneCourse} from "../http/courseApi";
+import { Container } from "@mui/material";
 import { styled } from '@mui/material/styles';
+import Similar from "./Similar";
 
 const Title = styled('span')({
     fontSize: '30px',
@@ -42,11 +43,12 @@ const InfoDesc = styled('div')({
 
 const InfoCourse = () => {
     const [course, setCourse] = useState({ info: [] })
+    const typeId = course.typeId
     const { id } = useParams()
     useEffect(() => {
         fetchOneCourse(id).then(data => setCourse(data))
-    }, [])
 
+    }, [])
     return (
         <Container sx={{ mt: 5 }}>
             <Cont>
@@ -70,9 +72,16 @@ const InfoCourse = () => {
                         <InfoDesc>
                             {info.description}
                         </InfoDesc>
-                        <Img width={200} height={200} src={'http://localhost:5000/' + info.infoImg}/>
                     </div>
                 )}
+            </div>
+            <hr/>
+            <div>
+                <InfoTitle>
+                    Similar
+                </InfoTitle>
+
+                <Similar typeId={typeId}/>
             </div>
 
         </Container>

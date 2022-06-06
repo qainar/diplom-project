@@ -39,7 +39,6 @@ const Span = styled('div')({
 
 const MainCont = styled('div')({
   height: '100px',
-
 })
 
 
@@ -55,8 +54,8 @@ const Types = () => {
       <Cont>
 
         {types.length !== 0 && types.map((type, idx) => (
-          <Span>
-            <Link to={`/coursesType/${type.id}`} key={idx} style={{ textDecoration: 'none', color: 'black', }}>
+          <Span key={type.id}>
+            <Link to={`/coursesType/${type.id}`} key={type.id} style={{ textDecoration: 'none', color: 'black', }}>
               {type.name}
             </Link>
           </Span>

@@ -26,6 +26,10 @@ const App = observer(() =>  {
             check().then(data => {
                 user.setUser(true)
                 user.setIsAuth(true)
+                console.log(data)
+                if (data.role === 'ADMIN'){
+                    user.setAdmin(true)
+                }else user.setAdmin(false)
             }).finally(() => setLoading(false))
         }, [])
     if(loading){
@@ -33,22 +37,6 @@ const App = observer(() =>  {
     }
     return (
 
-        // <div>
-        //
-        //     <Routes>
-        //         <Route path='/' element={<Auth/>} />
-        //         <Route path='/registration' element={<Auth/>} />
-        //         <Route path='/main' element={<MainPage/>} />
-        //         <Route path='/courses' element={ <CoursePage/> } />
-        //         <Route path='/courses/:id' element={<InfoPage/>} />
-        //         <Route path='/coursesType/:type' element={<TypesPage/>} />
-        //         <Route path='/my-courses' element={<MyCoursePage/>} />
-        //         <Route path='/admin' element={<Admin/>}/>
-        //     </Routes>
-        //
-        //
-        //
-        // </div>
         <BrowserRouter>
             <AppRouter/>
         </BrowserRouter>

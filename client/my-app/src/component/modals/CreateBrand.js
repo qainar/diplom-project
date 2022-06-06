@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import Modal from '@mui/material/Modal';
-import { Box, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { createBrand } from "../../http/courseApi";
 import { styled } from '@mui/material/styles';
 
@@ -24,11 +23,7 @@ const CreateBrand = ({ }) => {
         })
     }
     return (
-        // <Modal
-        //     open={show}
-        //     onClose={onHide}
 
-        // >
         <div>
             <Typography variant='h6' component="h2">
                 Create Brand
@@ -45,7 +40,7 @@ const CreateBrand = ({ }) => {
 
             </div>
         </div>
-        // </Modal>
+
 
     )
 }

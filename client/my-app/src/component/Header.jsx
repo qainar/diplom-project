@@ -1,20 +1,15 @@
-import { Avatar, Box, Grid, IconButton, InputBase, MenuItem, Paper, Typography } from '@mui/material';
+import { Grid, IconButton, InputBase,  Paper} from '@mui/material';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import Divider from '@mui/material/Divider';
-import MenuIcon from '@mui/icons-material/Menu';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import photo from '../source/image/Avatar.png'
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { fetchOneUser } from "../http/courseApi";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext,  useState } from "react";
 import { Context } from "../index";
-import {LOGIN_ROUTE} from "../utils/consts";
-import Button from "@mui/material/Button";
-import { Menu } from "@mui/icons-material";
 import AccountMenu from "./AccountMenu";
 import {observer} from "mobx-react-lite";
+import axios from "axios";
+
+
 
 
 const UserName = styled('span')({
@@ -41,26 +36,27 @@ const Span = styled('div')({
     padding: '10px',
     '&:hover': {
         background: '#503a65',
-        transition: '.6s'
+        transition: '.6s',
+        color: 'white'
     }
 })
 
 
 const Header = observer(() => {
-    const { user } = useContext(Context)
-    const navigate = useNavigate()
-    const logout = () => {
-        try {
-            localStorage.removeItem('token')
-            user.setUser()
-            user.setIsAuth(false)
-            navigate(LOGIN_ROUTE)
-        } catch (e) {
-            alert(e.response.data.message)
-        }
-    }
+    const {course, user} = useContext(Context)
     const userName = localStorage.getItem('userName')
-    console.log(userName)
+    const [value, setValue] = useState('')
+    const navigate = useNavigate()
+    const onChange = () => {
+        const url = 'http://localhost:5000/api/course/name'
+        if (value.trim().length !==0 ){
+            axios.get(url, {params: {name: value}}).then((resp)=>{
+                course.setSearch(resp.data)
+            })
+        }
+        navigate('/search')
+    }
+
     return (
         <div style={{ paddingTop: 20 }}>
             <Grid container
@@ -86,8 +82,11 @@ const Header = observer(() => {
                             sx={{ ml: 1, flex: 1 }}
                             placeholder="Search"
                             inputProps={{ 'aria-label': 'search' }}
+                            type='text'
+                            value={value}
+                            onChange={event => setValue(event.target.value)}
                         />
-                        <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                        <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" onClick={onChange}>
                             <SearchIcon />
                         </IconButton>
 
@@ -105,7 +104,7 @@ const Header = observer(() => {
             <br />
             <Cont>
                 <Span><Link to="/main" style={{ textDecoration: 'none', color: 'black', }}>Main</Link></Span>
-                <Span><Link to="/my-courses" style={{ textDecoration: 'none', color: 'black', }}>My courses</Link></Span>
+                <Span><Link to="/my-courses" style={{ textDecoration: 'none', color: 'black', '&:hover': {color: 'white'} }}>My courses</Link></Span>
                 <Span><Link to="/courses" style={{ textDecoration: 'none', color: 'black', }}>All Courses</Link></Span>
             </Cont>
 

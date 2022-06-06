@@ -3,8 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
 import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -13,7 +11,7 @@ import Button from '@mui/material/Button';
 import { Context } from "../index";
 import Types from "./Types";
 import AddIcon from '@mui/icons-material/Add';
-import { IconButton, Stack } from "@mui/material";
+import { IconButton} from "@mui/material";
 import { addCard } from "../http/courseApi";
 
 
@@ -24,29 +22,8 @@ const Title = styled('span')({
 
 const Cont = styled('div')({
     flexGrow: 1,
-    width: '1550px'
+    width: 'auto'
 })
-
-const DivContainer = styled('div')({
-    display: 'flex',
-    width: '100%',
-    padding: '20px',
-    marginBottom: '10px',
-    justifyContent: 'space-between',
-    border: '1px solid black',
-    borderRadius: '10px',
-    position: 'relative',
-
-})
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(3),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    marginTop: '20px'
-}));
 
 const LinkButton = styled(Button)({
     textDecoration: 'none',
@@ -59,8 +36,17 @@ const LinkButton = styled(Button)({
     }
 })
 
+const Flex = styled('div')({
+    display: 'flex',
+    flexFlow: 'row wrap',
+    alignItems: 'flex-start',
+})
 
-
+const Carding = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '200px'
+})
 
 const Courses = (props) => {
 
@@ -98,15 +84,12 @@ const Courses = (props) => {
             <Title>Courses Page</Title>
             <Types />
             <Cont>
-
-
-                <Box sx={{ flexGrow: 1, marginTop: '20px' }}>
-                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Box sx={{ flexGrow: 1, marginTop: '20px'}}>
+                    <Flex>
                         {appState.length >= 0 ?
                             appState.map((course) =>
-                                <Grid item xs={2} sm={4} md={4} key={course.id}>
-                                    <Card sx={{ display: 'flex', }}>
-                                        <Box sx={{ display: 'flex', flexDirection: 'column', }}>
+                                    <Card sx={{ display: 'flex', margin: '0 15px' }} key={course.id}>
+                                        <Carding>
                                             <CardContent sx={{ flex: '1 0 auto' }}>
                                                 <Typography component="div" variant="h5">
                                                     {course.name}
@@ -122,16 +105,16 @@ const Courses = (props) => {
                                                         Link
                                                     </LinkButton>
                                                 </Link>
-                                                <IconButton>
-                                                    <AddIcon onClick={() => { handleChange(course.id) }} />
+                                                <IconButton onClick={() => { handleChange(course.id) }}>
+                                                    <AddIcon/>
                                                 </IconButton>
                                             </Box>
 
 
-                                        </Box>
+                                        </Carding>
                                         <CardMedia
                                             component="img"
-                                            sx={{ width: 'auto', height: '180px' }}
+                                            sx={{ width: '180px', height: '180px' }}
                                             image={'http://localhost:5000/' + course.img}
                                             alt="Live from space album cover"
 
@@ -139,9 +122,8 @@ const Courses = (props) => {
 
                                     </Card>
 
-                                </Grid>
                             ) : <p>No more</p>
-                        }</Grid>
+                        }</Flex>
                 </Box>
 
 

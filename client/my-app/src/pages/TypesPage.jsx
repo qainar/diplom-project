@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
+import {Grid, IconButton} from "@mui/material";
 import Header from "../component/Header";
 import Courses from "../component/Courses";
 import React, { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Card from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
 
 const LinkButton = styled(Button)({
     textDecoration: 'none',
@@ -22,6 +23,20 @@ const LinkButton = styled(Button)({
         borderColor: 'black',
     }
 })
+
+const Flex = styled('div')({
+    display: 'flex',
+    flexFlow: 'row wrap',
+    alignItems: 'flex-start',
+})
+
+const Carding = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '150px'
+})
+
+
 const TypesPage = () => {
     const { type } = useParams()
     const [courses, setCourses] = useState()
@@ -42,10 +57,10 @@ const TypesPage = () => {
 
                         <Grid item xs={10} md={10}>
                             <Header />
-                            {courses && courses.rows.length && courses.rows.map((course) => (
-                                <Grid item xs={2} sm={4} md={4} key={course.id}>
-                                    <Card sx={{ display: 'flex', marginTop: '30px' }}>
-                                        <Box sx={{ display: 'flex', flexDirection: 'column', }}>
+                            <Flex>
+                                {courses && courses.rows.length && courses.rows.map((course) => (
+                                    <Card sx={{ display: 'flex', marginTop: '20px' }} key={course.id}>
+                                        <Carding>
                                             <CardContent sx={{ flex: '1 0 auto' }}>
                                                 <Typography component="div" variant="h5">
                                                     {course.name}
@@ -54,28 +69,29 @@ const TypesPage = () => {
                                                     {course.price}
                                                 </Typography>
                                             </CardContent>
+
                                             <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 2 }}>
                                                 <Link to={'/courses/' + course.id} style={{ textDecoration: 'none', }}>
-                                                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 2 }}>
-
-                                                        <LinkButton variant='outlined'>
-                                                            Link
-                                                        </LinkButton>
-
-                                                    </Box>
+                                                    <LinkButton variant='outlined'>
+                                                        Link
+                                                    </LinkButton>
                                                 </Link>
                                             </Box>
-                                        </Box>
+
+
+                                        </Carding>
                                         <CardMedia
                                             component="img"
-                                            sx={{ width: 'auto', height: '180px' }}
+                                            sx={{ width: '180px', height: '180px' }}
                                             image={'http://localhost:5000/' + course.img}
                                             alt="Live from space album cover"
 
                                         />
+
                                     </Card>
-                                </Grid>
-                            ))}
+                                ))}
+                            </Flex>
+
                         </Grid>
 
                     </Grid>

@@ -93,30 +93,6 @@ const Auth = observer(() => {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
-
-
-
-    // const click = async () => {
-    //
-    //     try {
-    //         let data;
-    //         if (isLogin) {
-    //             data = await login(email, password)
-    //         }
-    //         else {
-    //             data = await registration(email, name, password)
-    //         }
-    //         user.setUser(user)
-    //         user.setIsAuth(true)
-    //         navigate('/courses')
-    //         localStorage.setItem('userId', data.id)
-    //         localStorage.setItem('userName', data.name)
-    //
-    //     } catch (e) {
-    //         alert(e.response.data.message)
-    //     }
-    // }
-
     async function click (){
         let data;
         try {
@@ -128,9 +104,16 @@ const Auth = observer(() => {
             }
             user.setUser(user)
             user.setIsAuth(true)
+
+            if (data.role === 'ADMIN'){
+                user.setAdmin(true)
+            }else user.setAdmin(false)
+
             navigate('/main')
+
             localStorage.setItem('userId', data.id)
             localStorage.setItem('userName', data.name)
+
         }catch (e){
             alert(e.response.data.message)
         }

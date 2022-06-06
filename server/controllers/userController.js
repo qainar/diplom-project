@@ -2,7 +2,6 @@ const ApiError = require('../error/ApiError')
 const jwt = require('jsonwebtoken')
 const {User, Basket} = require('../models/models')
 const bcrypt = require('bcrypt')
-const {where} = require("sequelize");
 
 const generateJwt = (id, name ,email, role) => {
     return jwt.sign(

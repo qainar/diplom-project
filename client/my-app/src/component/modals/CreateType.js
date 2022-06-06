@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import Modal from '@mui/material/Modal';
-import { Box, Button, Typography } from "@mui/material";
+import {  Button, Typography } from "@mui/material";
 import { createType } from "../../http/courseApi";
 import { styled } from '@mui/material/styles';
 
@@ -24,12 +23,7 @@ const CreateType = () => {
         })
     }
     return (
-        // <Modal
-        //     open={show}
-        //     onClose={onHide}
-
-        // >
-        <Box sx={{ marginTop: '20px' }}>
+        <div>
             <Typography variant='h6' component="h2">
                 Create type
             </Typography>
@@ -44,8 +38,7 @@ const CreateType = () => {
                 </Button>
 
             </div>
-        </Box>
-        // </Modal>
+        </div>
     )
 }
 
