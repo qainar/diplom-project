@@ -93,10 +93,6 @@ Type.belongsToMany(Brand, { through: TypeBrand })
 Brand.belongsToMany(Type, { through: TypeBrand })
 
 
-
-
-
-
 module.exports = {
     User,
     Basket,
@@ -109,5 +105,3 @@ module.exports = {
     CourseInfo,
     News
 }
-
-

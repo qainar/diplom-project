@@ -88,7 +88,7 @@ const MyCourse = () => {
 
     return (
         <div style={{ paddingTop: 30 }}>
-            <Title>Courses Page</Title>
+            <Title>My courses</Title>
 
             <Cont>
                 <Box sx={{ flexGrow: 1, marginTop: '20px' }}>
@@ -120,7 +120,7 @@ const MyCourse = () => {
                                 </Carding>
                                 <CardMedia
                                     component="img"
-                                    sx={{ width: '180px', height: '180px' }}
+                                    sx={{ width: '180px', height: '180px', objectFit: 'contain' }}
                                     image={'http://localhost:5000/' + data.img}
                                     alt="Live from space album cover"
                                 />

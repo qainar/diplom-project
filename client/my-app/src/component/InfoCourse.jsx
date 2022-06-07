@@ -53,7 +53,7 @@ const InfoCourse = () => {
         <Container sx={{ mt: 5 }}>
             <Cont>
                 <div>
-                    <Img width={150} height={150} src={'http://localhost:5000/' + course.img} />
+                    <Img width={150} height={150} src={'http://localhost:5000/' + course.img} style={{objectFit: 'contain'}}/>
                 </div>
 
                 <div style={{}}>

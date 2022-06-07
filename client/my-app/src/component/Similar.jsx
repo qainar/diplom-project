@@ -85,7 +85,7 @@ const Similar = ({typeId}) => {
                         </Carding>
                         <CardMedia
                             component="img"
-                            sx={{ width: '180px', height: '180px' }}
+                            sx={{ width: '180px', height: '180px', objectFit: 'contain' }}
                             image={'http://localhost:5000/' + cour.img}
                             alt="Live from space album cover"
 
